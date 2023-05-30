@@ -9,6 +9,7 @@ export const NewEntry = () => {
   };
 
   const handleClick = () => {
+    //backend url
     fetch("https://topblogbackend-production.up.railway.app/entries", {
       method: "POST",
       mode: "cors",
