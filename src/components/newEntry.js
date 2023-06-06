@@ -3,21 +3,29 @@ import React, { useState } from "react";
 export const NewEntry = () => {
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
+  const [isPublished, setIsPublished] = useState(false);
   const jsonData = {
     title: title,
     content: content,
+    isPublished: isPublished,
   };
 
-  const handleClick = () => {
-    //backend url
-    fetch("https://topblogbackend-production.up.railway.app/entries", {
+  function handleClick() {
+    fetch("https://topblogbackend-production.up.railway.app/new_entry", {
       method: "POST",
-      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(jsonData),
-    });
-  };
+    }).then((response) => console.log(response));
+  }
+
+  function handleChange() {
+    isPublished ? setIsPublished(false) : setIsPublished(true);
+  }
+
   return (
-    <form>
+    <div>
       <label>
         Title:
         <input
@@ -32,7 +40,20 @@ export const NewEntry = () => {
         name="content"
         onChange={(e) => setcontent(e.target.value)}
       ></input>
-      <button onClick={handleClick}>Submit</button>
-    </form>
+      <label for="isPublished">Mark for public view</label>
+      <input
+        type="checkbox"
+        id="isPublished"
+        name="isPublished"
+        onClick={handleChange}
+      ></input>
+      <button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        Submit
+      </button>
+    </div>
   );
 };
