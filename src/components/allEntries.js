@@ -41,7 +41,7 @@ export const AllEntries = () => {
                   <h1>{entry.title}</h1>
                 </Link>
                 <p>{entry.content}</p>
-                <p>{entry.date_posted}</p>
+                <p>{new Date(entry.date_posted).toDateString()}</p>
                 <button onClick={() => deletePost(entry._id)}>Delete</button>
               </li>
             );

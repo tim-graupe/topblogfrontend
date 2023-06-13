@@ -13,6 +13,7 @@ export const NewEntry = () => {
   function handleClick() {
     fetch("https://topblogbackend-production.up.railway.app/new_entry", {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },

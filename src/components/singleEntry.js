@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NoPage } from "./noPage";
 import { EditEntry } from "./editEntry";
+import { Reply } from "./newReply";
 export const SingleEntry = () => {
   const [entry, setEntry] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +63,8 @@ export const SingleEntry = () => {
           <button onClick={() => deleteEntry(entry._id)}>Delete</button>
           <button onClick={() => handleClick()}>Edit</button>
           {isOpen ? <EditEntry props={entry} /> : null}
+
+          <Reply props={entry} />
         </div>
       )}
     </div>
