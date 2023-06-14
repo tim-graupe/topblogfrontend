@@ -38,6 +38,7 @@ export const SignUp = () => {
       <input
         name="adminCode"
         type="password"
+        placeholder="Optional"
         onChange={(e) => setAdminCode(e.target.value)}
       />
       <button onClick={handleClick}>Click</button>
