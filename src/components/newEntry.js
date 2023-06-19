@@ -29,18 +29,21 @@ export const NewEntry = () => {
     <div>
       <label>
         Title:
+        <br></br>
         <input
           type="text"
           name="title"
           onChange={(e) => settitle(e.target.value)}
         />
       </label>
+      <br></br>
       <label>Content</label>
-      <input
+      <br></br>
+      <textarea
         type="text"
         name="content"
         onChange={(e) => setcontent(e.target.value)}
-      ></input>
+      ></textarea>
       <label for="isPublished">Mark for public view</label>
       <input
         type="checkbox"
