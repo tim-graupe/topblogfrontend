@@ -1,31 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const [test, setTest] = useState(null);
 
-  const isLogged = (req, res, next) => {
-    if (req) {
-      console.log(req.username);
-    } else console.log("req.useer");
-  };
-
-  const handleLogin = (e) => {
+  useEffect(() => {
+    localStorage === null
+      ? setTest(null)
+      : setTest(JSON.parse(localStorage.user));
+  }, []);
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      fetch("https://topblogbackend-production.up.railway.app/log-in", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      }).then((response) => console.log(response));
+      const response = await fetch(
+        "https://topblogbackend-production.up.railway.app/log_in",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // credentials: "include",
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data.user);
+      if (data.message !== undefined) {
+        setError(data.message);
+      } else {
+        // document.cookie = JSON.stringify(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setError(`Success! Welcome, ${username}!`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +48,7 @@ export const Login = () => {
     <div>
       <form onSubmit={handleLogin}>
         <h2>Login</h2>
-        {/* {error && <div>{error}</div>} */}
+        {error && <div>{error}</div>}
         <div>
           <label>Username:</label>
           <input
@@ -58,7 +71,9 @@ export const Login = () => {
         <br></br>
         <Link to={"/sign_up"}>New user?</Link>
       </form>
-      <button onClick={isLogged}>Click</button>
+      <Link to="https://topblogbackend-production.up.railway.app/log_out">
+        Logout
+      </Link>
     </div>
   );
 };
