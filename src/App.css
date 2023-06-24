@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+body {
+  margin: 0 auto;
+  width: 50%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+li {
+  list-style-type: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+h1 {
+  background:
+    linear-gradient(#1095c1 0 0) no-repeat calc(200% - var(--p, 0%)) 100% / 200% var(--p, .08em);
+  transition: .3s var(--t, 0s), background-position .3s calc(.3s - var(--t, 0s));
+  display: inline-block;
+
+}
+
+h1:hover {
+  --p: 100%;
+  --t: .3s;
+  color: #fff;
+}
+
+.links {
+  text-decoration: none;
+
+}
+
+.single-entry-loaded,
+.all-entries-list {
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  box-shadow: 0 0 50px 1px black;
+
+}
+
+.all-entries-list {
+  margin-top: 25px;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 800px) {
+  body {
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .entries-list-container {
+    width: 100%;
+    padding-left: 0;
   }
+
+
 }

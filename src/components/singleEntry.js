@@ -57,7 +57,7 @@ export const SingleEntry = () => {
       {entry === undefined ? (
         <NoPage />
       ) : (
-        <div>
+        <div className="single-entry-loaded">
           <h1>{entry.title}</h1>
           <p>{entry.content}</p>
           <button onClick={() => deleteEntry(entry._id)}>Delete</button>

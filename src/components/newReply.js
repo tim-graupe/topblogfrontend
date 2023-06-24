@@ -8,6 +8,7 @@ export const Reply = ({ props }) => {
   useEffect(() => {
     props.replies === undefined ? setIsLoading(true) : setIsLoading(false);
   }, [props.replies]);
+
   const handleClick = (id) => {
     fetch(`https://topblogbackend-production.up.railway.app/entries/${id}`, {
       method: "POST",
@@ -19,7 +20,7 @@ export const Reply = ({ props }) => {
         content: content,
       }),
     }).then((response) => console.log(response));
-    window.location.reload();
+    // window.location.reload();
   };
   return (
     <div className="post-reply-container">

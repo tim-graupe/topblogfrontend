@@ -33,19 +33,26 @@ export const AllEntries = () => {
         <h1>Loading please wait....</h1>
       ) : (
         <ul className="entries-list-container">
-          {entries.map((entry) => {
-            return (
-              <li key={entry._id}>
-                <Link to={`/entries/${entry._id}`}>
-                  {" "}
-                  <h1>{entry.title}</h1>
-                </Link>
-                <p>{entry.content}</p>
-                <p>{new Date(entry.date_posted).toDateString()}</p>
-                <button onClick={() => deletePost(entry._id)}>Delete</button>
-              </li>
-            );
-          })}
+          {entries
+            .filter((entry) => entry.isPublished)
+            .map((entry) => {
+              return (
+                <li key={entry._id} className="all-entries-list">
+                  <Link to={`/entries/${entry._id}`} className="links">
+                    {" "}
+                    <h1>{entry.title}</h1>
+                  </Link>
+                  <p>{entry.isPublished}</p>
+                  <p>Posted on {new Date(entry.date_posted).toDateString()}</p>
+                  <button
+                    onClick={() => deletePost(entry._id)}
+                    className="admin-controls"
+                  >
+                    Delete
+                  </button>
+                </li>
+              );
+            })}
         </ul>
       )}
     </div>

@@ -38,6 +38,7 @@ export const Login = () => {
         // document.cookie = JSON.stringify(data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
         setError(`Success! Welcome, ${username}!`);
+        window.open("/", "_self");
       }
     } catch (err) {
       console.log(err);
@@ -47,7 +48,7 @@ export const Login = () => {
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <h2>Login</h2>
+        <h2>Admin Login</h2>
         {error && <div>{error}</div>}
         <div>
           <label>Username:</label>
@@ -69,7 +70,7 @@ export const Login = () => {
         </div>
         <button type="submit">Login</button>
         <br></br>
-        <Link to={"/sign_up"}>New user?</Link>
+        {/* <Link to={"/sign_up"}>New user?</Link> */}
       </form>
       <Link to="https://topblogbackend-production.up.railway.app/log_out">
         Logout
